@@ -1,5 +1,7 @@
 package com.javarush.task.task32.task3209;
 
+import com.javarush.task.task32.task3209.listeners.FrameListener;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,8 +29,22 @@ public class View extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
     }
-    public void init(){}
+    public void init(){
+        initGui();//инициализация графического интерфейса. Реализация ниже
+        FrameListener frameListener = new FrameListener(this);
+        addWindowListener(frameListener);
+        setVisible(true);
+    }
     public void exit(){
         controller.exit();
+    }
+
+    public void initMenuBar(){} //инициализация меню
+    public void initEditor(){}  //инициализация окна редактирования
+    public void initGui(){      //инициализация графического интерфейса
+        initMenuBar();
+        initEditor();
+        pack(); //реализация унаследована от JFrame
+
     }
 }
