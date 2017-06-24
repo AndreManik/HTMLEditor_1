@@ -10,6 +10,11 @@ import java.awt.event.ActionListener;
 public class View extends JFrame implements ActionListener {
     private Controller controller;
 
+    //initialization windows/tabs/panels
+    private JTabbedPane tabbedPane = new JTabbedPane();     //tabs
+    private JTextPane htmlTextPane = new JTextPane();       //textWindow
+    private JEditorPane plainTextPane = new JEditorPane();  //editorPanel
+
     public Controller getController() {
         return controller;
     }
