@@ -73,8 +73,41 @@ public class Controller {
         view.resetUndo();
         currentFile = null;
     }
-    public void openDocument(){}
-    public void saveDocument(){}
+    public void openDocument(){
+        view.selectHtmlTab();
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileFilter(new HTMLFileFilter());
+
+        int n = fileChooser.showOpenDialog(view);
+
+        if (n == JFileChooser.APPROVE_OPTION){
+            currentFile = fileChooser.getSelectedFile();
+            resetDocument();
+            view.setTitle(currentFile.getName());
+
+            try(FileReader reader = new FileReader(currentFile)){
+                new HTMLEditorKit().read(reader, document, 0);
+            } catch (Exception e){
+                ExceptionHandler.log(e);
+            }
+
+            view.resetUndo();
+        }
+    }
+    public void saveDocument(){
+        if (currentFile == null){
+            saveDocumentAs();
+        } else {
+            view.selectHtmlTab();
+
+            try (FileWriter writer = new FileWriter(currentFile)){
+                new HTMLEditorKit().write(writer, document, 0,document.getLength());
+            } catch (Exception e){
+                ExceptionHandler.log(e);
+            }
+
+        }
+    }
     public void saveDocumentAs(){
         view.selectHtmlTab();
         JFileChooser fileChooser = new JFileChooser();
