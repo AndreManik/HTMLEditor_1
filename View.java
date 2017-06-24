@@ -43,14 +43,24 @@ public class View extends JFrame implements ActionListener {
 
     public void initMenuBar(){} //инициализация меню
     public void initEditor() {  //инициализация окна редактирования
-        htmlTextPane.setContentType("text/html");
+        htmlTextPane.setContentType("text/html"); //установка типа контента для окна
+
+        //вкладка HTML
         JScrollPane textScrollPane = new JScrollPane(htmlTextPane);
         tabbedPane.addTab("HTML", textScrollPane);
+
+        //вкладка Text
         JScrollPane plainScrollPane = new JScrollPane(plainTextPane);
         tabbedPane.addTab("Текст", plainScrollPane);
+
+        //установка начального размера
         tabbedPane.setPreferredSize(new Dimension(300, 100));
+
+        //создание слушателя переключения между вкладками представления и установка
         TabbedPaneChangeListener listener = new TabbedPaneChangeListener(this);
         tabbedPane.addChangeListener(listener);
+
+        //установка вкладок в центр окна можно и так: getContentPane().add(tabbedPane, BorderLayout.CENTER)
         Container container = getContentPane();
         container.add(tabbedPane, BorderLayout.CENTER);
     }
