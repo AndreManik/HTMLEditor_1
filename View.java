@@ -47,4 +47,6 @@ public class View extends JFrame implements ActionListener {
         pack(); //реализация унаследована от JFrame
 
     }
+
+    public void selectedTabChanged(){}
 }
